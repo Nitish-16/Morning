@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: courier;
+  background-color: white;
+  border; 1px solid black;
+}
+/*
+* {
+  box-sizing: 100 px;
+}
+*/
+.container {
+  padding: 16px;
+  background-color: white;
+}
+
+input[type=text], input[type=password], input[type=email], input[type=date] {
+  width: 95%;
+  padding: 20px;
+  margin: 3px 0 20px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=date]:focus {
+  background-color: #ffffff;
+  outline: none;
+}
+
+hr {
+  border: 2px solid black;
+  margin-bottom: 35px;
+}
+
+.submitbutton {
+  background-color: black;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+a {
+  color: dodgerblue;
+}
+
+</style>
+</head>
+<body>
+<div class="tab">
+<script>
+var divs=new Array();
+divs[0]="errFirst";
+divs[1]="errEmail";
+divs[2]="errPwd";
+divs[3]="errConfirm";
+function validate(){
+    var inputs=new Array();
+    inputs[0]=document.getElementById('n').value;
+    inputs[1]=document.getElementById('e').value;
+    inputs[2]=document.getElementById('p').value;
+    inputs[3]=document.getElementById('cp').value;
+    var errors= new Array();
+    errors[0]="<span>Please enter your Name!</span>";
+    errors[1]="<span>Please enter your e-mail-id!</span>";
+    errors[2]="<span>Please enter your Password!</span>";
+    errors[3]="<span>Please enter your Confirm Password!</span>";
+    for(i in inputs){
+        var errMsg=errors[i];
+        var divMsg=divs[i];
+        if(inputs[i]=="")
+            document.getElementById(divMsg).innerHTML=errMsg;
+        else if(i==1){
+            var atpos=inputs[i].indexOf("@");
+            var dotpos=inputs[i].lastIndexOf(".");
+            if(atpos<1 || dotpos<atpos+2 || dotpos+2>= inputs[i].length)
+                document.getElementById('errEmail').innerHTML="<span>Enter Valid e-mail adderss!!</span>";
+            else
+                document.getElementById(divMsg).innerHTML="OK!";
+        }else if(i==3){
+            var ff=document.getElementById('pwd').value;
+            var ss=document.getElementById('confirm').value;
+            if(ss!=ff)
+                document.getElementById("errConfirm").innerHTML="<span>Your password doesnot match..!!</span>";
+            else
+                document.getElementById(divMsg).innerHTML="OK!";
+        }else
+            document.getElementById(divMsg).innerHTML="OK!";
+    }
+}
+</script>
+<form>
+  <div class="container">
+    <h1 style="text-align:center">SIGNUP HERE</h1>
+        <hr>
+ <h3>Name</h3> 
+   <input type="text" id="n" placeholder="Enter Name" name="Name" onKeyup="Validate()"><div id="errFirst"></div>
+<h3>Date of birth</h3>
+  <input type="date" name="Date of birth">
+  <h3>Email</h3> 
+   <input type="email" id="e" placeholder="Enter Email" name="email" onKeyup="Validate()"><div id="errEmail"></div>
+<h3>Gender</h3>
+  <input type="checkbox" name="Gender" value="Male"> Male<br>
+  <input type="checkbox" name="Gender" value="Female"> Female<br>
+
+    <h3>Password</h3>
+    <input type="password" id="p" placeholder="Enter Password" name="Password" onKeyup="Validate()"><div id="errPwd"></div>
+
+    <h3>Confirm password</h3>
+    <input type="password" id ="cp" placeholder="Password" name="Confirm Password" onKeyup="Validate()"><div id="errConfirm"></div>
+    <hr>
+    
+ <p>already have an account ?<a href="">Login</a></p>
+   
+    <button type="submit" class="submitbutton">Submit</button>
+  </div>
+  
+  </form>
+</div>
+</body>
+</html>
